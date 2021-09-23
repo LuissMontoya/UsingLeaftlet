@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src=" https://unpkg.com/leaflet@1.6.0/dist/leaflet.js "></script>
+    <link rel="stylesheet" href=" https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" />
+
+    <style>
+        #map {
+            width: 100%;
+            height: 580px;
+            box-shadow: 5px 5px 5px #888;
+        }
+    </style>
+
+    <title>Ejercicio 2</title>
+</head>
+
+<body>
+    <div id="map"></div>
+
+    <script>
+        // CAPA OSM
+        var OSM = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>' + 'contributors',
+            maxZoom: 19
+        });
+
+        var map = L.map('map', {
+            center: [1.61389,  -75.6128],
+            layers: [OSM],
+            zoom: 14.3,
+            scrollWheelZoom: true,
+        });
+
+        //Marcador Universidad de la Amazonia
+        var marker = L.marker([1.6201276295608658, -75.60425802784036], {
+            draggable: true,
+            title: 'Coordenadas Universidad de la Amazonia'
+        }).addTo(map)
+        .bindPopup('Universidad de la Amazonia')
+        .openPopup();
+
+        //Marcador Alcaldia de Florencia
+        var marker = L.marker([1.615109, -75.613774], {
+            draggable: true,
+            title: 'Coordenadas Alcaldia de Florencia'
+        }).addTo(map)
+        .bindPopup('Alcaldia de Florencia')
+        .openPopup();
+
+        //Circulo con 500 metros a su contorno
+        var circle = L.circle([1.615109, -75.613774], 500, {
+            color: 'red',
+            fillcolor: '#f03',
+            fillOpacity: 0.5,
+        }).addTo(map);
+
+        //Marcador Plaza Santander
+        var marker = L.marker([1.615006, -75.613388], {
+            draggable: true,
+            title: 'Coordenadas Plaza Santander'
+        }).addTo(map)
+        .bindPopup('Plaza Santander')
+        .openPopup();
+        
+        //Poligono delimitador
+        var polygon = L.polygon([
+            [1.615339, -75.613006],
+            [1.614723, -75.612824],
+            [1.61454, -75.613457],
+            [1.615152, -75.613634]
+        ]).addTo(map)
+        .bindPopup('Plaza Santander');
+
+        //Marcador de Mi Casa
+        var marker = L.marker([1.6178772001980988, -75.60004411005849], {
+            draggable: true,
+            title: 'Coordenadas de vivienda'
+        }).addTo(map)
+        .bindPopup('Vivienda')
+        .openPopup();
+
+        //Linea entre la vivienda y la universidad
+        var polylinePoints = [
+            [1.6201343474432937, -75.60426070201683],
+            [1.6200806445504468, -75.60451929611887],
+            [1.6200893888918477, -75.60474192326905],
+            [1.6200901238121377, -75.60498586177475],
+            [1.6199960000542055, -75.60498530366397],
+            [1.6194182866050888, -75.60465217218683],
+            [1.619204548074243, -75.60451272180089],
+            [1.6190713486866721, -75.60444454605742],
+            [1.6186144436199463, -75.60401689809886],
+            [1.618487439662177, -75.60412071128172],
+            [1.6174528204617076, -75.60341726144377],
+            [1.617108979894058, -75.60318794306068],
+            [1.6166691114759415, -75.60267352584205],
+            [1.6169215713177059, -75.60227841663529],
+            [1.617005208202084, -75.60220869146806],
+            [1.6170888451044039, -75.6020274057242],
+            [1.617067161422427, -75.60193133970643],
+            [1.6174512716178553, -75.6018042848564],
+            [1.61760150832575, -75.60167413149054],
+            [1.6178059543546746, -75.60120929510286],
+            [1.617835381868765, -75.60106829721659],
+            [1.6178632608271657, -75.60081108879689],
+            [1.6179568261668298, -75.6004710332177],
+            [1.618001464241319, -75.60028124552497],
+            [1.617998009201535, -75.60027033041285],
+            [1.6178772001980988, -75.60004411005849]
+        ];
+
+        var polyline = L.polyline(polylinePoints).addTo(map); 
+
+        L.control.scale().addTo(map);
+    </script>
+
+</body>
+
+</html>
